@@ -1,0 +1,99 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Servicios | La Caffettiera{% endblock %}
+
+{% block content %}
+<h1 class="site-heading text-center text-white d-none d-lg-block">
+  <span class="site-heading-upper text-primary mb-3">L'autentico caffè d'italia</span>
+  <span class="site-heading-lower">La Caffettiera</span>
+</h1>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark py-lg-4" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand text-uppercase text-expanded font-weight-bold d-lg-none" href="{% url 'home' %}">La Caffettiera</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item px-lg-4">
+          <a class="nav-link text-uppercase text-expanded {% if request.path == '/' %}active{% endif %}" href="{% url 'home' %}">Inicio</a>
+        </li>
+        <li class="nav-item px-lg-4">
+          <a class="nav-link text-uppercase text-expanded {% if request.path == '/about/' %}active{% endif %}" href="{% url 'about' %}">Historia</a>
+        </li>
+        <li class="nav-item active px-lg-4">
+          <a class="nav-link text-uppercase text-expanded {% if request.path == '/services/' %}active{% endif %}" href="{% url 'services' %}">Servicios</a>
+        </li>
+        <li class="nav-item px-lg-4">
+          <a class="nav-link text-uppercase text-expanded {% if request.path == '/store/' %}active{% endif %}" href="{% url 'store' %}">Visítanos</a>
+        </li>
+        <li class="nav-item px-lg-4">
+          <a class="nav-link text-uppercase text-expanded {% if request.path == '/contact/' %}active{% endif %}" href="{% url 'contact' %}">Contacto</a>
+        </li>
+        <li class="nav-item px-lg-4">
+          <a class="nav-link text-uppercase text-expanded {% if request.path == '/blog/' %}active{% endif %}" href="{% url 'blog' %}">Blog</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Servicios -->
+{% for service in services reversed %}
+<section class="page-section">
+  <div class="container">
+    <div class="product-item">
+      <div class="product-item-title d-flex">
+        <div class="bg-faded p-5 d-flex mr-auto rounded">
+          <h2 class="section-heading mb-0">
+            <span class="section-heading-upper">{{ service.subtitle }}</span>
+            <span class="section-heading-lower">{{ service.title }}</span>
+          </h2>
+        </div>
+      </div>
+      <img class="product-item-img mx-auto d-flex rounded img-fluid mb-3" src="{{ service.image.url }}" alt="">
+      <div class="product-item-description d-flex ml-auto">
+        <div class="bg-faded p-5 rounded">
+          <p class="mb-0">{{ service.content }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endfor %}
+
+<!-- Pié de página -->
+<footer class="footer text-faded text-center py-5">
+  <div class="container">
+    <p class="m-0">
+        <a href="#" class="link">
+          <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+          </span>
+        </a>
+        <a href="#" class="link">
+          <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+          </span>
+        </a>
+        <a href="#" class="link">
+          <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
+          </span>
+        </a>
+    </p>
+    <p class="m-0 mbt">
+        <a href="{% url 'sample' %}" class="link">Política de privacidad</a> ·
+        <a href="{% url 'sample' %}" class="link">Aviso legal</a> ·
+        <a href="{% url 'sample' %}" class="link">Cookies</a>
+    </p>
+    <p class="m-0 mbt1">&copy; La Caffettiera 2018</p>
+  </div>
+</footer>
+{% endblock %}

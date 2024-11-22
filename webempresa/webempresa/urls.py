@@ -1,13 +1,14 @@
 from django.contrib import admin
-from django.urls import path
-from core import views
+from django.urls import path, include
 urlpatterns = [
- path('', views.home, name="home"),
- path('about/', views.about, name="about"),
- path('services/', views.services, name="services"),
- path('store/', views.store, name="store"),
- path('contact/', views.contact, name="contact"),
- path('blog/', views.blog, name="blog"),
- path('sample/', views.sample, name="sample"),
+ path('', include('core.urls')),
+ path('services/', include('services.urls')),
  path('admin/', admin.site.urls),
 ]
+
+from django.conf import settings
+if settings.DEBUG:
+ from django.conf.urls.static import static
+ urlpatterns += static(settings.MEDIA_URL,
+ document_root=settings.MEDIA_ROOT)
+
